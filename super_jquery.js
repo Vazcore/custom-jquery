@@ -1,7 +1,10 @@
 'use strict';
 window.jq = function (selector) {
-    
-    let elements = document.querySelectorAll(selector);        
+    let elements;
+    if (selector.innerHTML !== undefined)
+        elements = [selector];
+    else
+        elements = document.querySelectorAll(selector);        
     
     let jq_object = {        
         addClass: function (classname) {
@@ -16,6 +19,21 @@ window.jq = function (selector) {
                 span.innerHTML = child;   
             }            
             this.appendChild(span);
+            return this;
+        },
+        html: function (html) {
+            if (!html) {
+                return this.innerHTML;
+            } else {
+                this.innerHTML = html;
+            }
+            
+            return this;
+        },
+        css: function (css_obj) {            
+            for (let prop in css_obj) {
+                this.style[prop] = css_obj[prop];
+            }            
             return this;
         }
     }; 
@@ -35,11 +53,30 @@ window.jq = function (selector) {
             });
             return this;
         },
-        append: function (child) {
+        append: function (child) {            
             this.each(function () {
-                jq_object.append.apply(this, [child]);
+                if (child[0] !== undefined) {
+                    for (let i = 0; i < child.length; i++) {
+                        (function(element, i) {
+                            jq_object.append.apply(element, [child[i]]);
+                        })(this, i);
+                        
+                    }                    
+                } else {
+                    jq_object.append.apply(this, [child]);   
+                }                
             });
             return this;
+        },
+        html: function (html) {
+            this.each(function () {
+                jq_object.html.apply(this, [html]);
+            });
+        },
+        css: function (css_object) {
+            this.each(function () {
+                jq_object.css.apply(this, [css_object]);
+            });
         }
     };
     

@@ -12,18 +12,31 @@
         </style>
     </head>
     <body>        
+        <hr />
+        <ul>
+            <li>List to copy</li>
+        </ul>
+        <hr />
+        
+        
         <div class="elements">Element 1</div>
-        <div class="elements">Element 2</div>
+        <div class="elements">Element 2</div>       
+        
         
         <script>
             let elements = jq('.elements');
-            elements.each(function (index) {
-                console.log(this);
-            });
-            elements.addClass('bold');
-            elements[1].addClass('gray');
+            elements.each(function (index) {                
+                jq(this).html('Element ' + index);
+            })
+            .append(jq('ul'))
+            .addClass('bold')
+            .css({'padding-left': '50px'});
             
-            elements.append('<h4>Child</h4>');
+            elements[1].addClass('gray').css({'color': '#c00'});
+            
+            //elements.append('<h4>Child</h4>');
+            
+            //console.log(elements[1].html());
         </script>
     </body>
 </html>
