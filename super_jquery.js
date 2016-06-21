@@ -35,6 +35,14 @@ window.jq = function (selector) {
                 this.style[prop] = css_obj[prop];
             }            
             return this;
+        },
+        attr: function (attr, val) {
+            if (!val) {
+                return this.getAttribute(attr);
+            } else {
+                this.setAttribute(attr, val);
+            }
+            return this;
         }
     }; 
     
@@ -77,6 +85,14 @@ window.jq = function (selector) {
             this.each(function () {
                 jq_object.css.apply(this, [css_object]);
             });
+            return this;
+        },
+        attr: function (attr, val) {
+            if (this[0] !== undefined) {
+                jq_object.attr.apply(this[0], [attr, val]);
+            } else {
+                jq_object.attr.apply(this, [attr, val]);
+            }
         }
     };
     

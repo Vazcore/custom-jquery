@@ -30,9 +30,10 @@
             })
             .append(jq('ul'))
             .addClass('bold')
-            .css({'padding-left': '50px'});
+            .css({'padding-left': '50px'})
+            .attr('data-pos', 'pos1');
             
-            elements[1].addClass('gray').css({'color': '#c00'});
+            elements[1].addClass('gray').css({'color': '#c00'}).attr('data-name', 'second element');
             
             //elements.append('<h4>Child</h4>');
             
