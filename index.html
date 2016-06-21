@@ -33,11 +33,18 @@
             .css({'padding-left': '50px'})
             .attr('data-pos', 'pos1');
             
-            elements[1].addClass('gray').css({'color': '#c00'}).attr('data-name', 'second element');
+            elements[1].addClass('gray').css({'color': '#c00'}).attr('data-name', 'second element')
+            .data('name', 'Alexey');
+            elements[1].append(elements[1].data('name'))
             
-            //elements.append('<h4>Child</h4>');
+            elements.one('click', function() {
+                alert("Clicked. But only ones on this element");
+            });
             
-            //console.log(elements[1].html());
+            jq('ul').on('click', function() {
+                this.append('<li>New Line</li>');                
+            });
+            
         </script>
     </body>
 </html>
