@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>My Super JQuery</title>
+        <script src="super_jquery.js"></script>
+        <style>
+            .gray {
+                background-color: silver;
+            }
+            .bold {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>        
+        <div class="elements">Element 1</div>
+        <div class="elements">Element 2</div>
+        
+        <script>
+            let elements = jq('.elements');
+            elements.each(function (index) {
+                console.log(this);
+            });
+            elements.addClass('bold');
+            elements[1].addClass('gray');
+            
+            elements.append('<h4>Child</h4>');
+        </script>
+    </body>
+</html>
